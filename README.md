@@ -4,12 +4,7 @@
 
 ## 快速开始
 
-```bash
-# 一键安装所有 Skill 到全局目录
-bash setup.sh
-```
-
-安装后重启 opencode，Agent 会自动发现可用的 Skills。
+放到Agent对应的skill目录中，Agent 会自动发现可用的 Skills。
 
 ## Skills 目录
 
