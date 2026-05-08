@@ -1,6 +1,6 @@
 # HooSkills
 
-个人自定义 [OpenCode](https://opencode.ai) Skills 集合。
+个人 Skills 集合。
 
 ## 快速开始
 
