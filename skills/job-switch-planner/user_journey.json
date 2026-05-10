@@ -1,0 +1,279 @@
+{
+  "profile": {
+    "name": "某某",
+    "tech_stack": {
+      "languages": ["C", "C++", "Go"],
+      "av_core": ["RTSP", "RTP/RTCP", "RTMP", "H264", "H265", "MP4/PS/TS/FLV", "FFmpeg", "ZLMediaKit"],
+      "protocols": ["GB/T28181", "ONVIF"],
+      "os": ["Linux", "网络编程", "多线程", "GDB调试"]
+    },
+    "work_years": 4,
+    "current_level": "初级",
+    "current_salary": "11k",
+    "education": {
+      "degree": "本科",
+      "major": "通信工程",
+      "school": "武汉轻工大学",
+      "period": "2018.09 - 2022.06"
+    },
+    "experience": [
+      {
+        "company": "深圳力维智联技术有限公司(前中兴力维)",
+        "period": "2022.07 - 至今",
+        "role": "C++开发工程师",
+        "project": "视频信息共享平台",
+        "responsibilities": [
+          "媒体网关：RTSP流媒体协议业务开发，推拉流功能，私有8000协议",
+          "硬件转码服务：FFmpeg API转码库开发，Go语言RTSP流媒体协议开发",
+          "视频上下联网关：GB/T28181协议信令交互，PS视频码流解包与封包",
+          "接入服务：对接厂商SDK功能接口"
+        ]
+      }
+    ],
+    "soft_skills": []
+  },
+  "expectations": {
+    "target_positions": ["RTC/WebRTC开发", "音视频/流媒体开发"],
+    "target_industry": "待定",
+    "expected_level": "中级",
+    "tech_stack_target": {
+      "continue": ["C++"],
+      "learn": ["WebRTC"],
+      "avoid": []
+    },
+    "expected_salary": "20k",
+    "location_preference": ["广东（深圳/广州）"],
+    "company_size_preference": ["大厂", "中型企业"],
+    "key_factors": ["薪资涨幅", "技术成长"]
+  },
+  "public_opinion": {
+    "sources": [
+      {
+        "source": "知乎/CSDN/技术社区",
+        "sentiment": "正面",
+        "summary": "音视频开发人才供不应求，C++是主流语言，FFmpeg为必备框架，高级工程师年薪普遍30万+",
+        "detail_urls": []
+      },
+      {
+        "source": "招聘平台（猎聘/拉勾/Boss直聘）",
+        "sentiment": "正面",
+        "summary": "全国月均薪资约20k，深圳3-5年经验C++音视频开发15k-30k",
+        "detail_urls": []
+      },
+      {
+        "source": "行业分析报告/腾讯云社区",
+        "sentiment": "正面",
+        "summary": "AVoIP市场年增12.5%，AI+音视频是未来方向，安防/直播/RTC/医疗影像场景持续扩张",
+        "detail_urls": []
+      },
+      {
+        "source": "HackerNews（OpenCLI实时采集）",
+        "sentiment": "正面",
+        "summary": "FFmpeg已合并WebRTC支持；Apple招聘WebRTC工程师；WebRTC生态持续活跃",
+        "detail_urls": []
+      }
+    ]
+  },
+  "market_analysis": {
+    "position": "C++音视频/流媒体开发工程师（深圳/广州）",
+    "trend": "平稳上升",
+    "salary_range": "15k-30k（4年经验）",
+    "common_concerns": [
+      "学习曲线陡峭",
+      "多数岗位要求5年+经验",
+      "技术栈繁杂（编码/协议/封装/框架）",
+      "纯安防方向天花板有限"
+    ],
+    "positive_signals": [
+      "人才供不应求",
+      "AVoIP市场CAGR 12.5%",
+      "资深专家薪资溢价显著（5年+达25k-30k）",
+      "AI+音视频打开新增长空间",
+      "裁员风险低于纯互联网业务岗"
+    ],
+    "overall_assessment": "你的4年C++安防音视频背景（RTSP/GB28181/FFmpeg转码）在当前市场有较强竞争力，20k期望合理且可达。主要增长方向：延续安防/RTC转型/流媒体服务器。",
+    "data_sources": ["知乎", "CSDN", "猎聘", "前程无忧", "Boss直聘", "拉勾网", "腾讯云社区", "HackerNews"]
+  },
+  "recommendations": [
+    {
+      "position": "安防音视频开发（延续当前）",
+      "match_score": 90,
+      "level": "高度匹配",
+      "reason": "技术栈95%匹配（RTSP/GB28181/FFmpeg），即投即面",
+      "risk": "安防方向天花板有限，薪资涨幅空间较小"
+    },
+    {
+      "position": "流媒体服务器开发（扩展方向）",
+      "match_score": 84,
+      "level": "高度匹配",
+      "reason": "学习成本低（补SRS/RTMP），市场薪资15-30k",
+      "risk": "需补充流媒体服务器深度经验"
+    },
+    {
+      "position": "C++音视频SDK开发（扩展方向）",
+      "match_score": 84,
+      "level": "高度匹配",
+      "reason": "与当前经验较接近，大厂需求大",
+      "risk": "需补充跨平台开发经验"
+    },
+    {
+      "position": "RTC/WebRTC开发（突破方向）",
+      "match_score": 72,
+      "level": "有潜力",
+      "reason": "天花板最高（3年经验可达30k+），市场需求旺盛",
+      "risk": "需系统学习WebRTC核心协议和QoS机制"
+    },
+    {
+      "position": "音视频编解码工程师（专业方向）",
+      "match_score": 74,
+      "level": "有潜力",
+      "reason": "专业性强，竞争相对较小",
+      "risk": "偏算法深度优化，与当前工程实践方向差异大"
+    }
+  ],
+  "selected_positions": ["RTC/WebRTC开发"],
+  "job_listings": {
+    "platform": "Boss直聘（2026-05-10 OpenCLI实时采集）",
+    "positions": [
+      {
+        "company": "Anker（安克创新）",
+        "job": "高级WebRTC客户端开发工程师",
+        "salary": "20-35K·16薪",
+        "location": "深圳",
+        "experience": "不限",
+        "skills": ["C++", "C", "FFmpeg", "WebRTC", "流媒体技术", "音视频开发"],
+        "match_level": "⭐⭐⭐ 最匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "Anker（安克创新）",
+        "job": "流媒体网络传输工程师",
+        "salary": "30-60K",
+        "location": "深圳宝安",
+        "experience": "3-5年",
+        "skills": ["流媒体传输"],
+        "match_level": "⭐⭐⭐ 最匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "绿联科技",
+        "job": "音视频开发工程师",
+        "salary": "20-35K·14薪",
+        "location": "深圳",
+        "experience": "3-5年",
+        "skills": ["C++", "FFmpeg", "音视频编解码", "OpenGL"],
+        "match_level": "⭐⭐⭐ 最匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "绿联科技",
+        "job": "WEBRTC开发工程师",
+        "salary": "25-40K·14薪",
+        "location": "深圳",
+        "experience": "5-10年",
+        "skills": ["WebRTC"],
+        "match_level": "⭐⭐⭐ 最匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "迅雷网络",
+        "job": "音视频播放SDK开发",
+        "salary": "18-35K",
+        "location": "深圳",
+        "experience": "3-5年",
+        "skills": ["C++", "FFmpeg", "音视频/流媒体开发"],
+        "match_level": "⭐⭐⭐ 最匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "广州视臻（视源股份）",
+        "job": "音视频开发工程师",
+        "salary": "20-40K·13薪",
+        "location": "广州黄埔",
+        "experience": "3-5年",
+        "skills": ["C++", "WebRTC", "流媒体", "OpenGL"],
+        "match_level": "⭐⭐⭐ 最匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "乔安",
+        "job": "流媒体工程师",
+        "salary": "15-30K·14薪",
+        "location": "深圳",
+        "experience": "3-5年",
+        "skills": ["C++", "FFmpeg", "P2P", "流媒体"],
+        "match_level": "⭐⭐ 匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "云翔青舟科技",
+        "job": "P2P流媒体服务器开发",
+        "salary": "25-40K",
+        "location": "深圳",
+        "experience": "3-5年",
+        "skills": ["SRS", "流媒体服务器"],
+        "match_level": "⭐⭐ 匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "多益网络",
+        "job": "音视频开发工程师",
+        "salary": "16-25K·14薪",
+        "location": "广州黄埔",
+        "experience": "不限",
+        "skills": ["C++", "音视频/流媒体开发"],
+        "match_level": "⭐⭐ 匹配",
+        "date": "2026-05-10 实时采集"
+      },
+      {
+        "company": "阿里巴巴",
+        "job": "音视频开发工程师",
+        "salary": "30-50K",
+        "location": "广州海珠",
+        "experience": "1-3年",
+        "skills": ["C++"],
+        "match_level": "⭐⭐ 匹配",
+        "date": "2026-05-10 实时采集"
+      }
+    ],
+    "gap_analysis": {
+      "have": ["C/C++", "FFmpeg基础", "H264/H265编解码", "RTSP/RTP/RTCP协议", "GB28181/ONVIF安防协议", "Linux网络编程"],
+      "need_to_add": ["WebRTC核心架构（SDP/ICE/DTLS-SRTP）", "拥塞控制（GCC/BBR）", "QoS机制（FEC/NACK/JitterBuffer）", "ZLMediaKit/SRS流媒体服务器深度", "QUIC/WebTransport新协议", "跨平台开发（Android/iOS）"]
+    }
+  },
+  "switch_plan": {
+    "target": "RTC/WebRTC开发",
+    "timeline": "3个月",
+    "stages": [
+      {
+        "stage": "第1个月 — 补齐WebRTC核心短板",
+        "learning_contents": [
+          {"topic": "WebRTC整体架构", "resource": "《WebRTC for the Curious》免费书籍"},
+          {"topic": "WebRTC核心协议（SDP/ICE/STUN/TURN/DTLS-SRTP）", "resource": "webrtc.org官方文档"},
+          {"topic": "拥塞控制（GCC/BBR）+ QoS（FEC/NACK/JitterBuffer）", "resource": "《WebRTC音视频实时互动技术》"},
+          {"topic": "FFmpeg WebRTC集成", "resource": "FFmpeg官方git commit"}
+        ],
+        "practice_project": "基于ZLMediaKit搭建WebRTC推拉流Demo，实现浏览器实时播放摄像头流"
+      },
+      {
+        "stage": "第2个月 — 项目包装 + 简历优化 + 定向投递",
+        "actions": [
+          "将Anker/绿联/视臻的JD逐条对照，针对性调整简历关键词",
+          "将GB28181+RTSP转码经验包装为音视频流媒体全链路项目",
+          "补充WebRTC相关描述到简历（包括自学Demo）",
+          "在GitHub上传WebRTC练习项目代码",
+          "重点投递：Anker（最匹配）、绿联科技、广州视臻、迅雷网络"
+        ]
+      },
+      {
+        "stage": "第3个月 — 面试冲刺",
+        "actions": [
+          "刷C++音视频面经（牛客网、看准网）",
+          "重点准备：WebRTC架构、拥塞控制、SDP协商流程、H264/H265编码原理",
+          "模拟面试：你的安防背景是差异化优势——强调GB28181+RTSP+FFmpeg转码实战经验",
+          "第二梯队投递：乔安、云翔青舟、多益网络、阿里巴巴（碰运气）"
+        ]
+      }
+    ]
+  }
+}
