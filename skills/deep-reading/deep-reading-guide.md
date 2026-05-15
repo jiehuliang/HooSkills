@@ -21,6 +21,12 @@ Every section gets at least 略读. No section is skipped.
 - Counter-intuitive conclusions or surprising results
 - Normative requirements (MUST/SHALL in RFCs)
 
+**关键要点详细讲解规则**: Every key concept, technique, or mechanism that appears in a 精读 section MUST receive in-depth explanation. This means:
+- Do NOT stop at a one-sentence definition — unpack: what, how, why, and comparison to alternatives
+- A reader unfamiliar with the domain should be able to understand the concept without external lookup
+- Especially important for: domain-specific terminology, novel techniques, core algorithms, and concepts the document's argument depends on
+- If a concept is used across multiple sections, the detailed explanation goes in the section where it's first introduced; later sections reference back
+
 ### 2. Goal Relevance
 
 When user has declared a learning goal, → 精读:

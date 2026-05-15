@@ -93,6 +93,7 @@ Present the complete analysis:
 For each section:
 - **核心内容**: 3-5 sentence summary
 - **关键概念**: definitions, terminology, important abstractions
+- **关键要点详细讲解**: for each key concept/technique/mechanism identified, provide in-depth explanation covering: (1) what it is, (2) how it works concretely, (3) why it's used here (design rationale / problem it solves), (4) its relationship to alternative approaches. This is NOT a one-line definition — unpack the concept so someone unfamiliar can understand it fully without consulting external sources. Prioritize concepts that are: novel to non-experts, central to understanding the document, or easily misunderstood if only glossed over
 - **重要细节**: constraints, edge cases, non-obvious implications, design rationale
 - **关联**: how this section relates to others
 
@@ -108,9 +109,9 @@ For each section:
 
 ### End of Phase 1
 
-After outputting all notes, transition to Phase 2:
-- "深读完成。你可以就文档内容提问，或说'总结'进入总结环节。"
-- "Deep read complete. Ask me anything about the document, or say 'summarize' to wrap up."
+After outputting all notes, transition to Phase 2 with the warm-up Q&A:
+- "深读完成。以下是几个值得探讨的问题，你可以从中选择或提出自己的问题（说'总结'进入总结环节）："
+- "Deep read complete. Here are a few questions worth exploring — pick one or ask your own (say 'summarize' to wrap up):"
 
 ---
 
@@ -123,6 +124,23 @@ User asks questions about the document. Answer with:
 - When a question spans multiple sections, trace the connections
 - If the question reveals a gap in the reading, load the relevant passage and supplement
 - Gently correct misunderstandings by citing the original text
+
+### Q&A Warm-up
+
+When entering Phase 2, proactively provide **2-3 example Q&A pairs** that are worth exploring based on the document content. These should:
+
+- Be non-trivial — not asking "what is X" but digging into why, how, trade-offs, or implications
+- Demonstrate the kind of deep questions the user can ask
+- Each answer should follow the same standard: precise answer first, then context, with source citations
+
+Present the warm-up questions as a menu:
+
+> **你可以从以下问题开始提问（或提出你自己的问题）：**
+> 1. <Question 1>
+> 2. <Question 2>
+> 3. <Question 3>
+
+Wait for the user to choose a question or ask their own. Answer the chosen one(s), then continue the interactive Q&A loop.
 
 Track Q&A pairs that produce genuine insight — include in the final export.
 
