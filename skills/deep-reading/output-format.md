@@ -1,19 +1,19 @@
 # Output Format
 
-Templates and structure for persisting reading notes to disk.
+Templates for auto-generating reading notes after Phase 3 summary and export.
 
 ## Directory Structure
 
 ```
 reading-notes/
   <document-name>/
-    README.md          # Overview: metadata, goal, summary, key takeaways
-    structure.md       # Document structure map with deep-read markers
+    README.md          # Overview: metadata, summary, key takeaways
+    structure.md       # Full document structure with depth indicators
     chapters/
-      01-<chapter>.md  # Per-chapter notes
+      01-<chapter>.md  # Per-chapter deep reading notes
       02-<chapter>.md
     insights.md        # Cross-chapter insights, connections, synthesis
-    questions.md       # Selected Q&A from the reading session
+    questions.md       # Selected Q&A from Phase 2
 ```
 
 ## Naming Convention
@@ -21,7 +21,9 @@ reading-notes/
 - `<document-name>`: lowercase, hyphens for spaces, no special chars
   - "RFC 9113" → `rfc-9113`
   - "Designing Data-Intensive Applications Ch.5" → `designing-data-intensive-applications-ch5`
+  - "Attention Is All You Need" → `attention-is-all-you-need`
 - Chapter files: zero-padded number + short name from heading
+- If directory exists, auto-increment: `rfc-9113-v2`, `rfc-9113-v3`, etc.
 
 ## README.md Template
 
@@ -29,7 +31,7 @@ reading-notes/
 # <Document Title>
 
 - 来源：<file path or URL>
-- 类型：<RFC / 书籍 / 论文 / 技术文档 / 博客>
+- 类型：<RFC / 论文 / 书籍 / 技术文档 / 博客>
 - 阅读日期：<YYYY-MM-DD>
 - 阅读目标：<user's stated goal, or "通读了解" if none>
 
@@ -43,9 +45,26 @@ reading-notes/
 - <Takeaway 2>
 - <Takeaway 3>
 
-## 精读章节
+## 章节概览
 
-- <Chapter/Section>：<why it was worth deep reading>
+| 章节 | 深度 | 要点 |
+|------|------|------|
+| <Chapter 1> | 精读/略读 | <one-line summary> |
+| <Chapter 2> | 精读/略读 | <one-line summary> |
+```
+
+## structure.md Template
+
+```markdown
+# 文档结构
+
+<Full chapter/section tree with depth indicators>
+
+- 1. Introduction [精读]
+  - 1.1 Background [略读]
+  - 1.2 Contributions [精读]
+- 2. Core Mechanism [精读]
+  ...
 ```
 
 ## chapters/NN-name.md Template
@@ -64,11 +83,11 @@ reading-notes/
 
 ## 重要细节
 
-<Deep reading notes — the non-obvious details, constraints, edge cases>
+<Deep reading notes — non-obvious details, constraints, edge cases, design rationale>
 
 ## 与其他章节的关联
 
-<How this connects to other parts of the document, if applicable>
+<How this connects to other parts of the document>
 ```
 
 ## insights.md Template
@@ -80,13 +99,17 @@ reading-notes/
 
 - <Insight about how concepts connect across chapters>
 
-## 个人理解
+## 整体架构/论证结构
 
-- <Synthesized understanding that goes beyond any single section>
+<Overarching design philosophy or argument structure>
 
 ## 开放问题
 
 - <Questions that remain after reading>
+
+## 批判性思考（论文专用）
+
+<Methodology assessment, assumption audit, limitation analysis>
 ```
 
 ## questions.md Template
@@ -101,14 +124,23 @@ reading-notes/
 **相关段落：** <Location in source — chapter, section, page>
 
 ---
+
+## Q: <User's question>
+
+**A:** <Answer summary>
+
+**相关段落：** <Location in source>
+
+---
 ```
 
-Only include questions that produced genuine insight. Skip trivial clarifications.
+Only include Q&A pairs that produced genuine insight. Skip trivial clarifications.
 
 ## Export Behavior
 
-1. Ask user for confirmation before writing
-2. Create directory structure in one pass
-3. Generate all files based on the reading session
-4. Report what was created: "笔记已输出到 `reading-notes/<name>/`，包含 N 个章节笔记"
-5. Do NOT overwrite existing notes without asking — if directory exists, ask whether to merge or replace
+1. After Phase 3 summary, ask user whether to export: "要我把笔记整理输出到 `reading-notes/<文档名>/` 吗？"
+2. Only write files after user confirms
+3. Create directory structure in one pass
+4. Generate all files based on the full reading session (Phase 1 + Phase 2 Q&A)
+5. Report what was created: "笔记已输出到 `reading-notes/<name>/`，包含 N 个章节笔记和 M 条问答。"
+6. If directory exists, save to `<name>-v2/` (auto-increment) to avoid overwriting

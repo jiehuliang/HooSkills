@@ -3,19 +3,17 @@ name: deep-reading
 description: Use when user provides a document, PDF, URL, or technical spec (like RFC) to read, understand, summarize, or study in depth
 ---
 
-# Reading
+# Deep Reading
 
-Systematic reading assistant for long documents, PDFs, books, and technical specs. Identifies sections worth deep reading, guides comprehension, and exports structured notes.
+Fully automatic deep reading with post-read Q&A. Reads entire documents deeply in one pass, then opens an interactive Q&A phase, followed by summary and auto-export.
 
 ## Flow
 
 1. **Receive input** — identify type (local file / URL / pasted text)
-2. **Choose strategy** — based on document length
-3. **Background & overview** — introduce context, usage scenarios, and high-level summary before any deep reading
-4. **Output structure map** — chapter list + deep reading recommendations
-5. **Interactive phase** — answer questions, guide reading
-6. **Wrap-up summary** — tie the whole document together, connect key concepts across sections
-7. **Export** — persist notes to `reading-notes/` when user finishes
+2. **Detect document type** — classify and choose specialized strategy
+3. **Phase 1: Auto Deep Read** — load and deeply read the entire document; output comprehensive notes without asking
+4. **Phase 2: Q&A Interaction** — user asks questions about the content; answer with precise citations
+5. **Phase 3: Summary & Export** — wrap-up synthesis connecting all concepts; ask user whether to export to `reading-notes/`
 
 ## Input Handling
 
@@ -29,10 +27,24 @@ Systematic reading assistant for long documents, PDFs, books, and technical spec
 
 For URLs, prefer Playwright because it renders the page as a user would see it, preserving tables, code formatting, and dynamic content. Fall back to simpler methods when blocked.
 
-## Strategy Selection
+## Document Type Detection
 
-- **Short document (<5000 words / <20 PDF pages):** Read fully → output overview + recommendations
-- **Long document (≥5000 words):** Scan structure first → output structure map + recommendations → load sections on demand
+After loading content, classify the document to choose the right strategy:
+
+| Signature | Type | Specialized Guide |
+|-----------|------|-------------------|
+| "RFC" + 4-digit number, IETF stream markers | RFC | `rfc-reading-guide.md` |
+| Abstract + Introduction + Related Work + (Method/Evaluation/Conclusion) | Academic Paper | `paper-reading-guide.md` |
+| API references, code blocks > 30% of content | Code-heavy Tech Doc | Standard + code-density rules |
+| Long chapters, narrative structure, TOC | Book | Standard |
+| Short (<2000 words), informal, blog-style | Article/Blog | Standard |
+
+## Strategy
+
+- **Short document (<5000 words / <20 PDF pages):** Read fully in one pass
+- **Long document (≥5000 words):** Read in chunks, processing each section deeply before moving to the next
+
+Word count estimation for PDFs: `estimated_words ≈ pages × 400` (English) or `pages × 600` (Chinese).
 
 ### Structure Detection (long documents)
 
@@ -40,57 +52,138 @@ Priority order:
 1. Explicit TOC / Table of Contents
 2. Heading hierarchy (H1/H2/H3 or PDF bookmarks)
 3. Section numbering patterns (e.g., "1. Introduction", "2. Terminology")
-4. Fixed-length chunking with first-sentence summaries as fallback
+4. For papers: standard section names (Abstract, Introduction, Related Work, etc.)
+5. Fixed-length chunking with first-sentence summaries as fallback
 
-## Overview Output (Required)
+### Code-Heavy Documents
 
-Every reading session starts with:
+When code blocks exceed ~30% of total content:
+- Focus on architecture, data flow, and design rationale — not line-by-line syntax
+- Skip boilerplate: imports, configuration, trivial scaffolding
+- Highlight: core algorithms, API contracts, state machines, error handling strategy
+- Flag sections where the code and prose disagree (code is ground truth)
 
-1. **Background & context** — what problem does this document address, why does it exist, what are the typical usage scenarios
-2. **Metadata** — title, author, type, estimated length
-3. **One-sentence summary**
-4. **Structure map** — chapter/section list with deep-read markers
-5. **Deep reading recommendations** — see deep-reading-guide.md for criteria
-6. **Mode prompt** — "默认按需深入模式。你可以：选择章节编号深入 / 说'逐段带我读' / 直接提问"
+---
 
-The background section ensures readers have enough context to understand WHY the document matters before diving into HOW it works.
+## Phase 1: Auto Deep Read
 
-## Interaction Modes
+Read the entire document without asking the user what to read. Output all notes in one pass.
 
-| Mode | Trigger | Behavior |
-|------|---------|----------|
-| A: Guided | "逐段带我读" / "一段一段来" / "继续" / "下一段" | Read section by section, highlight key points, wait for confirmation |
-| B: On-demand (default) | User picks a chapter/section number | Load and explain selected section |
-| C: Question-driven | User asks a specific content question | Locate relevant passage, answer with context |
+### Depth Levels (per section)
 
-Mode switches automatically based on user intent. After answering a question in C mode, return to previous mode.
+- **精读 (Deep)**: Full extraction — every key point, constraint, and implication. Used for high-density content (definitions, algorithms, design decisions, normative requirements).
+- **略读 (Light)**: Concise summary with key takeaways. Used for supporting content (examples, background, boilerplate).
 
-## Answering Guidelines
+Every section gets at least 略读. See `deep-reading-guide.md` for evaluation criteria.
 
-- Before diving into technical details, provide necessary background and usage scenarios so the reader understands WHY before HOW
-- When explaining a section, always extract and highlight key points: core concepts, critical constraints, design decisions, and non-obvious implications
-- Use tables, bullet lists, or bold text to make key points scannable
-- Cite specific locations in the source text
-- Load unread sections when a question requires them
-- Gently correct misunderstandings, citing the original text
-- Track key insights that emerge during discussion — include in final export
+### Output Structure
 
-## Wrap-up Summary
+Present the complete analysis:
 
-When all recommended sections have been read, or when the user signals completion:
-- Provide a cohesive summary that ties the entire document together
-- Connect key concepts across sections, showing how they relate and depend on each other
-- Highlight the overall design philosophy or architectural decisions
-- Note any open questions or areas for further exploration
-- Then ask if the user wants to export notes
+#### 1. Document Overview
+- **Metadata**: title, author, type, length, date
+- **Background**: what problem this addresses, why it exists, typical usage scenarios
+- **One-sentence summary**
+
+#### 2. Structure Map
+- Full chapter/section list with depth indicators (精读/略读)
+- One-line annotation for each section
+
+#### 3. Deep Reading Notes (per section)
+For each section:
+- **核心内容**: 3-5 sentence summary
+- **关键概念**: definitions, terminology, important abstractions
+- **重要细节**: constraints, edge cases, non-obvious implications, design rationale
+- **关联**: how this section relates to others
+
+#### 4. Cross-Document Insights
+- How key concepts connect across sections
+- Overarching design philosophy or argument structure
+- Open questions or areas needing further exploration
+
+#### 5. Type-Specific Analysis
+- **RFC**: requirement keyword analysis (MUST/SHOULD/MAY with targets), security considerations, cross-reference map
+- **Paper**: contribution assessment, methodology evaluation, limitations, three-pass synthesis
+- **Code-heavy doc**: architecture overview, API surface summary, data flow
+
+### End of Phase 1
+
+After outputting all notes, transition to Phase 2:
+- "深读完成。你可以就文档内容提问，或说'总结'进入总结环节。"
+- "Deep read complete. Ask me anything about the document, or say 'summarize' to wrap up."
+
+---
+
+## Phase 2: Q&A Interaction
+
+User asks questions about the document. Answer with:
+
+- Direct, precise answer first, then context
+- Citations to specific sections/chapters in the source
+- When a question spans multiple sections, trace the connections
+- If the question reveals a gap in the reading, load the relevant passage and supplement
+- Gently correct misunderstandings by citing the original text
+
+Track Q&A pairs that produce genuine insight — include in the final export.
+
+User can exit Q&A phase by saying "总结" / "summarize" / "done" / "好了".
+
+---
+
+## Phase 3: Summary & Export
+
+### Wrap-up Summary
+
+Present a cohesive synthesis:
+- Tie the entire document together — how concepts relate and depend on each other
+- Highlight the overall design philosophy, argument structure, or main contribution
+- For papers: final assessment of contribution quality, methodology, and limitations
+- For RFCs: key normative requirements at a glance
+- Note open questions from both the reading and the Q&A phase
+
+### Export Prompt
+
+After presenting the summary, ask the user:
+
+- "要我把笔记整理输出到 `reading-notes/<文档名>/` 吗？"
+- "Export notes to `reading-notes/<doc-name>/`?"
+
+Wait for user confirmation before writing files.
+
+### Export Structure
+
+When user confirms:
+
+```
+reading-notes/
+  <document-name>/
+    README.md          # Overview + metadata + key takeaways
+    structure.md       # Full structure map with depth indicators
+    chapters/
+      01-<chapter>.md  # Per-chapter deep reading notes
+      02-<chapter>.md
+    insights.md        # Cross-document connections and synthesis
+    questions.md       # Selected Q&A from Phase 2
+```
+
+Follow `output-format.md` for file templates. If directory exists, save to `<name>-v2/` (auto-increment).
+
+Report: "笔记已输出到 `reading-notes/<name>/`，包含 N 个章节笔记和 M 条问答。"
+
+---
 
 ## RFC-Specific Guidelines
 
-When reading RFCs, apply additional practices from rfc-reading-guide.md to improve comprehension quality. Key areas: document identity check, requirement keywords (MUST/SHOULD/MAY) interpretation, cross-reference handling, ABNF reading, and security considerations.
+When reading RFCs, apply practices from `rfc-reading-guide.md`:
+- Document identity check (stream, category, currency)
+- Requirement keyword interpretation (MUST/SHOULD/MAY), including target identification (sender vs receiver)
+- Cross-reference handling, ABNF translation, security considerations summary
 
-## Export
+## Paper-Specific Guidelines
 
-When user says "阅读完了" / "总结一下" / "输出笔记" or similar:
-- Ask for confirmation: "要我把笔记整理输出到 reading-notes/<文档名>/ 吗？"
-- Follow output-format.md for directory structure and templates
-- Do NOT write files during the reading phase
+When reading papers, execute the three-pass method automatically from `paper-reading-guide.md`:
+- First pass: extract core contribution (problem, approach, key result)
+- Second pass: evaluate methodology, results, and positioning
+- Third pass: critique assumptions, gaps, and implications
+
+Synthesize all three passes into the Phase 1 output.
