@@ -123,17 +123,18 @@ After completing the reading notes, scan `<skill-dir>/reading-notes/` for past s
 | `one_liner` semantic match | 1 pt | Similar core idea |
 
 **Scoring thresholds** (保守策略 — 宁缺毋滥):
-- **≥5 pts → 强关联**: Auto-load the related note's README.md + insights.md summary. Present a comparison paragraph.
-- **3-4 pts → 中关联**: Mention the related note with its one_liner. Offer to load details.
+- **≥5 pts → 强关联**: Automatically load the related note's README.md + insights.md. Present a comparison paragraph inline. No user action needed — the comparison is part of the Phase 1 output.
+- **3-4 pts → 中关联**: Show the related note's title and one_liner. Add "说'展开'加载完整对比" at the end. Do NOT auto-load.
 - **<3 pts → 不提及**: Skip to avoid noise.
 
-**Output**: List the top 10 results in a "Related Readings" subsection:
+**Output**: Present the results in a "Related Readings" subsection. Strong associations come with full comparison paragraphs already expanded:
 
 ```
-### Related Readings
+### 关联阅读 (Related Readings)
 
 **强关联**:
-- [Doc Title 1] — 同属 <domain> 领域，共用 <techniques> 技术。核心差异：<difference>。
+- ** [Doc Title 1] ** — 同属 <domain> 领域，共用 <techniques> 技术。
+  > <comparison paragraph: what this doc adds, how it differs, what it confirms/contradicts>
 
 **中关联**:
 - [Doc Title 2] — 都涉及 <problem>。说"展开"加载完整对比。
@@ -191,11 +192,15 @@ Typical triggers:
 
 Missing information is NOT a flaw in the reading — it's a signal about the document's completeness. Note it and move on.
 
-### End of Phase 1
+### End of Phase 1 → Phase 2 Transition
 
-After outputting all notes, transition to Phase 2 with the warm-up Q&A:
+Related Readings (§6) is part of the Phase 1 output. Strong associations are already expanded with comparison paragraphs inline — no user action needed. Medium associations show their one_liner with an offer to expand later.
+
+After outputting all Phase 1 notes (including Related Readings), transition directly to Phase 2:
+
 - "深读完成。以下是几个值得探讨的问题，你可以从中选择或提出自己的问题（说'总结'进入总结环节）："
-- "Deep read complete. Here are a few questions worth exploring — pick one or ask your own (say 'summarize' to wrap up):"
+- Follow with Q&A warm-up questions.
+- If the user says "展开" for a medium-related note during Phase 2, load that note and present a comparison, then return to the Q&A loop.
 
 ---
 
@@ -219,12 +224,23 @@ When the user asks about relationships to past readings:
 
 ### Q&A Warm-up
 
-When entering Phase 2, proactively provide **2-3 example questions** worth exploring. These should be non-trivial — not "what is X" but why, how, trade-offs, or implications. Present as a menu:
+When entering Phase 2, proactively provide **3-4 example questions**. Mix two types:
+
+- **本文自问** (2-3 questions): Non-trivial questions about the current document — why, how, trade-offs, implications.
+- **关联对比** (1-2 questions, only if related readings exist): Cross-document questions referencing the auto-expanded strong-related or medium-related notes. E.g. "本文的 XX 方法和之前读的 YY 中的 ZZ 有什么异同？"
+
+Present as a menu:
 
 > **你可以从以下问题开始提问（或提出你自己的问题）：**
-> 1. <Question 1>
-> 2. <Question 2>
-> 3. <Question 3>
+> 
+> 📖 **本文自问**
+> 1. <Question about current doc>
+> 2. <Question about current doc>
+> 
+> 🔗 **关联对比**
+> 3. <Cross-document question referencing a related note>
+
+If no related readings exist, only show the 本文自问 section with 3 questions.
 
 ### Question Tagging
 
@@ -235,6 +251,7 @@ Tag every user question with a category label before answering, so the user can 
 | 🔍 概念澄清 | "X和Y的区别是什么"、"这个术语什么意思" |
 | ⚙️ 机制深挖 | "为什么这样设计"、"具体怎么实现的" |
 | 🧪 实验评估 | 数据集选择、基线对比、指标可信度 |
+| 📚 关联对比 | "和之前读的XX有什么异同"、"YY的方法能用到这个场景吗" |
 | 🔗 跨域延伸 | "这个思路能否用到Z领域"、"与另一篇工作的关系" |
 | 🧭 批判审视 | "局限性在哪"、"假设是否合理"、"有没有更好的方案" |
 
