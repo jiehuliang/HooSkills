@@ -50,6 +50,27 @@ When code exceeds text:
 - Compress: imports, config boilerplate, trivial scaffolding
 - If code and prose disagree, code is ground truth — flag this
 
+### 5. Output Quality Constraints
+
+Applied to every section regardless of depth level:
+
+**No Vague Praise**: Evaluative claims like "elegant design", "thorough experiments", "effective approach" are banned. Every such claim must be replaced with concrete specifics (numbers, names, direct quotes from the source). If the document itself uses vague language, note it explicitly.
+
+**Cross-Section Verification**: When a concept, claim, or data point appears in multiple sections, check that it's used consistently. Flag discrepancies: a parameter value that differs between Methods and Experiments, a claim in the Introduction contradicted by actual results, a limitation acknowledged in Discussion but erased in Conclusion.
+
+**Missing Information Markers**: When key information a competent reader would expect is absent, mark it with `⚠️ 信息缺失`. Triggers include: missing hyperparameters, unreported data splits, unstated assumptions, unjustified baseline choices, absent error bars, undisclosed computational cost, failure cases not shown. This is not about the reading quality — it's about the document's completeness as a signal to the reader.
+
+### 6. Cross-Document Relevance
+
+When reading, actively note connections to previously saved reading notes. The INDEX.md files in `<skill-dir>/reading-notes/` serve as the knowledge base for this:
+
+- **Technique lineage**: Is this technique an evolution of something seen before? A reaction against it?
+- **Problem adjacency**: Is this paper solving the same problem from a different angle?
+- **Contradiction**: Does this document's claim conflict with a past reading? Flag it.
+- **Gap fill**: Does this answer an open question from a past reading?
+
+The goal is to build cumulative understanding — every new reading should hook into the existing knowledge graph, not sit in isolation.
+
 ## Processing Priority (internal reading order)
 
 May differ from document order:
