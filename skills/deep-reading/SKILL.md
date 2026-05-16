@@ -153,6 +153,15 @@ User can exit Q&A phase by saying "总结" / "summarize" / "done" / "好了".
 ### Wrap-up Summary
 
 Present a cohesive synthesis:
+
+**关键要点串联**: Start by listing each key concept/technique/mechanism from the document in a logical flow, briefly summarizing what each is and why it matters. Then connect them — show how they form a chain: A enables B, B feeds into C, C addresses the problem stated at the beginning. This should read as a coherent narrative, not a bullet list.
+
+**原则**:
+- Each key point: one sentence summary, one sentence on its role in the bigger picture
+- The connection between adjacent points must be explicit ("X does Y, which then serves as input to Z")
+- Skip trivial details; only keep the load-bearing concepts
+- The reader should walk away understanding the document's core argument as a causal chain
+
 - Tie the entire document together — how concepts relate and depend on each other
 - Highlight the overall design philosophy, argument structure, or main contribution
 - For papers: final assessment of contribution quality, methodology, and limitations
